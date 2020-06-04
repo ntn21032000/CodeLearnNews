@@ -49,96 +49,100 @@
 							<!-- Start latest-post Area -->
 							<div class="latest-post-wrap">
 								<h4 class="cat-title">Tin <?php echo $_GET['tenloaitin']; ?></h4>
-                <?php
-                  if (isset($_GET['more']))
-                  {
-                    $i = 0;
-                    foreach ($xml->xpath('//channel/item') as $items)
-                    {
-                      if ($i > $_GET['more']) {
-                        break;
-                      }
-                      if (strpos($items->description, "src=")) {
-                        $str = explode('src=', $items->description);
-                        $str1 = explode('></a></br>', $str[1]);
-                ?>
-                <div class="single-latest-post row align-items-center">
-                  <div class="col-lg-5 post-left">
-                    <div class="feature-img relative">
-                      <div class="overlay overlay-bg"></div>
-                      <img class="img-fluid" src=<?php echo $str1[0]; ?> >
-                    </div>
-                    <ul class="tags">
-                      <li><a href="#"><?php echo $_GET['tenloaitin']; ?></a></li>
-                    </ul>
-                  </div>
-                  <div class="col-lg-7 post-right">
-                    <a href="<?php echo $items->link; ?>">
-                      <h4>
-                        <?php echo $items->title; ?>
-                      </h4>
-                    </a>
-                    <ul class="meta">
-                      <li><a href="#"><span class="lnr lnr-calendar-full"></span>
-                        <?php echo $items->pubDate; ?>
-                      </a></li>
-                    </ul>
-                    <p class="excert">
-                      <?php echo  $str1[1]; ?>
-                    </p>
-                  </div>
-                </div>
-                <?php $i++;} }
-                if ($_GET['more'] < 25) { ?>
-                  <div class="load-more">
-                    <a href=
-						<?php
-							$link = "loaitin.php?loaitin=".$_GET['loaitin']."&tenloaitin=".$_GET['tenloaitin']."&more=25";
-							echo '"'.$link.'"'.'class="primary-btn"';
-						?> >Xem Thêm
-					</a>
-                  </div>
-                <?php
-                  } }
-                  else {
-                    $i = 0;
-                    foreach ($xml->xpath('//channel/item') as $items)
-                    {
-                      if (($i > 4)) {
-                        break;
-                      }
-                      if (strpos($items->description, "src=")) {
-                        $str = explode('src=', $items->description);
-                        $str1 = explode('></a></br>', $str[1]);
-                  ?>
-                  <div class="single-latest-post row align-items-center">
-                    <div class="col-lg-5 post-left">
-                      <div class="feature-img relative">
-                        <div class="overlay overlay-bg"></div>
-                        <img class="img-fluid" src=<?php echo $str1[0].'"'; ?> >
-                      </div>
-                      <ul class="tags">
-                        <li><a href="#"><?php echo $_GET['tenloaitin']; ?></a></li>
-                      </ul>
-                    </div>
-                    <div class="col-lg-7 post-right">
-                      <a href="<?php echo $items->link; ?>">
-                        <h4>
-                          <?php echo $items->title; ?>
-                        </h4>
-                      </a>
-                      <ul class="meta">
-                        <li><a href="#"><span class="lnr lnr-calendar-full"></span>
-                          <?php echo $items->pubDate; ?>
-                        </a></li>
-                      </ul>
-                      <p class="excert">
-                        <?php echo $str1[1]; ?>
-                      </p>
-                    </div>
-                  </div>
-                  <?php $i++;} }?>
-                  <div class="load-more">
+				                <?php
+				                  if (isset($_GET['more']))
+				                  {
+				                    $i = 0;
+				                    foreach ($xml->xpath('//channel/item') as $items)
+				                    {
+				                      if ($i > $_GET['more']) {
+				                        break;
+				                      }
+				                      if (strpos($items->description, "src=")) {
+				                        $str = explode('src=', $items->description);
+				                        $str1 = explode('></a></br>', $str[1]);
+				                        $srcImage = $str1[0];
+				                        $description = $str1[1];
+				                ?>
+				                <div class="single-latest-post row align-items-center">
+				                  <div class="col-lg-5 post-left">
+				                    <div class="feature-img relative">
+				                      <div class="overlay overlay-bg"></div>
+				                      <img class="img-fluid" src=<?php echo $srcImage; ?> >
+				                    </div>
+				                    <ul class="tags">
+				                      <li><a href="#"><?php echo $_GET['tenloaitin']; ?></a></li>
+				                    </ul>
+				                  </div>
+				                  <div class="col-lg-7 post-right">
+				                    <a href="<?php echo $items->link; ?>">
+				                      <h4>
+				                        <?php echo $items->title; ?>
+				                      </h4>
+				                    </a>
+				                    <ul class="meta">
+				                      <li><a href="#"><span class="lnr lnr-calendar-full"></span>
+				                        <?php echo $items->pubDate; ?>
+				                      </a></li>
+				                    </ul>
+				                    <p class="excert">
+				                      <?php echo  $description; ?>
+				                    </p>
+				                  </div>
+				                </div>
+				                <?php $i++;} }
+				                	if ($_GET['more'] < 25) { ?>
+									<div class="load-more">
+									<a href=
+										<?php
+											$link = "loaitin.php?loaitin=".$_GET['loaitin']."&tenloaitin=".$_GET['tenloaitin']."&more=25";
+											echo '"'.$link.'"'.'class="primary-btn"';
+										?> >Xem Thêm
+									</a>
+									</div>
+				                <?php
+				                  } }
+				                  else {
+				                    $i = 0;
+				                    foreach ($xml->xpath('//channel/item') as $items)
+				                    {
+				                      if (($i > 4)) {
+				                        break;
+				                      }
+				                      if (strpos($items->description, "src=")) {
+				                        $str = explode('src=', $items->description);
+				                        $str1 = explode('></a></br>', $str[1]);
+				                        $srcImage = $str1[0];
+				                        $description = $str1[1];
+				                ?>
+								<div class="single-latest-post row align-items-center">
+									<div class="col-lg-5 post-left">
+									  <div class="feature-img relative">
+									    <div class="overlay overlay-bg"></div>
+									    <img class="img-fluid" src=<?php echo $srcImage; ?> >
+									  </div>
+									  <ul class="tags">
+									    <li><a href="#"><?php echo $_GET['tenloaitin']; ?></a></li>
+									  </ul>
+									</div>
+									<div class="col-lg-7 post-right">
+									  <a href="<?php echo $items->link; ?>">
+									    <h4>
+									      <?php echo $items->title; ?>
+									    </h4>
+									  </a>
+									  <ul class="meta">
+									    <li><a href="#"><span class="lnr lnr-calendar-full"></span>
+									      <?php echo $items->pubDate; ?>
+									    </a></li>
+									  </ul>
+									  <p class="excert">
+									    <?php echo $description; ?>
+									  </p>
+									</div>
+								</div>
+				                  <?php $i++;} }?>
+				                  <div class="load-more">
   									<a href=
 	  									<?php
 		  									$link = "loaitin.php?loaitin=".$_GET['loaitin']."&tenloaitin=".$_GET['tenloaitin']."&more=10";
@@ -146,24 +150,22 @@
 	  									?> >Xem Thêm
   									</a>
   								</div>
-                  <?php } ?>
-
+                    			<?php } ?>
 							</div>
 							<!-- End latest-post Area -->
 						</div>
-            <div class="col-lg-4">
+            			<div class="col-lg-4">
 							<div class="sidebars-area">
 
 								<!-- START ENTERTAIMENT POST -->
-                <?php
-                  include 'layoutcontent/entertainment.php';
-                ?>
-
-                <!-- START ENTERTAIMENT POST -->
+				                <?php
+				                  include 'layoutcontent/entertainment.php';
+				                ?>
+				                <!-- STOP ENTERTAIMENT POST -->
 								<div class="single-sidebar-widget ads-widget">
 									<img class="img-fluid" src="img/banner-3.jpg" alt="">
 								</div>
-                <div class="single-sidebar-widget newsletter-widget">
+                				<div class="single-sidebar-widget newsletter-widget">
 									<h6 class="title">Thông Báo</h6>
 									<p>
 										Đăng ký để nhận thông báo qua Email.
@@ -182,10 +184,10 @@
 								</div>
 
 								<!-- START FUNPOST POST -->
-                <?php
-                  include 'layoutcontent/funpost.php';
-                ?>
-                <!-- START FUNPOST POST -->
+				                <?php
+				                  include 'layoutcontent/funpost.php';
+				                ?>
+				                <!-- START FUNPOST POST -->
 
 								<div class="single-sidebar-widget social-network-widget">
 									<h6 class="title">Mạng Xã Hội</h6>
